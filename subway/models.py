@@ -3,10 +3,13 @@ from .compose_subway_stations import shortest_path
 
 
 # Create your models here.
-class Administrators(models.Model):
+class Admins(models.Model):
     admin_id = models.CharField(max_length=20)
     admin_pw = models.CharField(max_length=20)
     station = models.ForeignKey('Subway', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.admin_id
 
 
 class Subway(models.Model):
@@ -15,8 +18,22 @@ class Subway(models.Model):
     line = models.CharField(max_length=20)
     fr_code = models.CharField(max_length=10)
     landmarks = models.ForeignKey('SubwayLandmarkPoint', on_delete=models.CASCADE, null=True)
+    up_station = models.CharField(max_length=20, default="", null=True)
+    down_station = models.CharField(max_length=20, default="", null=True)
 
-    def insert_stations(self):
+    def insert_stations(self, data, line, s):
+        station = data[line][s]
+        self.code = station["STATION_CD"]
+        self.name = station["STATION_NM"]
+        self.line = station["LINE_NUM"]
+        self.fr_code = station["FR_CODE"]
+        if s > 0:
+            self.up_station = data[line][s-1]["STATION_NM"]
+        if s < len(data[line])-1:
+            self.down_station = data[line][s+1]["STATION_NM"]
+        self.save()
+
+    def getShortestPath(self):
         stations = shortest_path()
 
     class Meta:

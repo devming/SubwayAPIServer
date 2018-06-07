@@ -4,7 +4,7 @@ import json
 def shortest_path():
     with open('subway/data/subway.json') as data_file:
         data = json.load(data_file)
-
+    print("222")
     return data
 
     # pprint(data)  # data는 json 전체를 dictionary 형태로 저장하고 있음

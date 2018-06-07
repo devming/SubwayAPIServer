@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from subway.compose_subway_stations import shortest_path
-from subway.models import Subway
+from subway.models import Subway, Admins
 
 
 # def get_rest_list(request):
@@ -19,7 +19,20 @@ from subway.models import Subway
 #     return JsonResponse()
 
 
-def station_admin(request):
+def register_landmark(request):
+    admin_info = Admins.objects.get(admin_id='skku')
+    return render(request, 'subway/admin_main.html', {'station': admin_info.station, 'admin': admin_info})
+
+
+def admin_setting(request):
     subway_station_json = shortest_path()
-    subway_station_json["line1"]
-    return render(request, 'subway/admin_main.html', {'stations': subway_station_json["line1"]})
+    return render(request, 'subway/admin_setting.html', {'stations': subway_station_json})
+
+
+# 한 번만 호출
+def insert_station_datas():
+    data = shortest_path()
+
+    for line in data:
+        for station in range(len(data[line])):
+            Subway().insert_stations(data, line, station)
