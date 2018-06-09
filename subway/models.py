@@ -41,13 +41,19 @@ class Subway(models.Model):
 
 
 class SubwayLandmarkPoint(models.Model):
-    landmark_index = models.IntegerField
+    index = models.IntegerField
     station = models.ForeignKey(Subway, on_delete=models.CASCADE)
-    x = models.IntegerField
-    y = models.IntegerField
-    z = models.IntegerField
-    left = models.BooleanField      # 0 = 하행선 (내선)
-    right = models.BooleanField     # 1 = 상행선 (외선)
+    # x = models.IntegerField
+    # y = models.IntegerField
+    # z = models.IntegerField
+    left = models.CharField(max_length=5, null=False, default="")      # 0 = 하행선 (내선)
+    right = models.CharField(max_length=5, null=False, default="")     # 1 = 상행선 (외선)
+
+    def save_data(self, index, station, left, right):
+        self.index = index
+        self.station = station
+        self.left = left
+        self.right = right
 
 
 # class History(models.Model):

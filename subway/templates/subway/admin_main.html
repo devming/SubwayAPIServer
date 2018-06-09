@@ -64,56 +64,41 @@
                 <h4>Landmark Point 등록하기</h4>
             </div>
         </div>
-        <div class="panel-body">
-            <form class="form form-vertical">
-                <div class="control-group">
-                    <label>역명</label>
-                    <div class="controls">
-                        <input type="text" readonly value="{{ station.name }}">
+        <form action="/" method="post">
+            <div class="panel-body">
+                <form class="form form-vertical">
+                    <div class="control-group">
+                        <label>역명</label>
+                        <div class="controls">
+                            <input type="text" name="station_name" readonly value="{{ station.name }}">
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label>Message</label>
-                    <div class="controls">
-                        <textarea class="form-control"></textarea>
+                    <div class="control-group">
+                        <label>Landmark Point 번호</label>
+                        <div class="controls">
+                            <input type="text" name="left_where" readonly value="{{ landmark_cnt }}">
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label>Message</label>
-                    <div class="controls">
-                        <textarea class="form-control"></textarea>
+                    <div class="control-group">
+                        <label>왼쪽 상/하행 구분</label>
+                        <div class="controls">
+                            <select class="form-control">
+                                <option>상행({{ station.up_station }})</option>
+                                <option>하행({{ station.down_station }})</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label>고유 번호</label>
-                    <div class="controls">
-                        <input type="text" class="form-control" placeholder="Enter Name">
+                    <div class="control-group">
+                        <label></label>
+                        <div class="controls">
+                            <button type="submit" class="btn btn-primary">
+                               등록하기
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label>Message</label>
-                    <div class="controls">
-                        <textarea class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label>Category</label>
-                    <div class="controls">
-                        <select class="form-control">
-                            <option>options</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label></label>
-                    <div class="controls">
-                        <button type="submit" class="btn btn-primary">
-                           등록하기
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </form>
         <!--/panel content-->
     </div>
     <!--/panel-->
