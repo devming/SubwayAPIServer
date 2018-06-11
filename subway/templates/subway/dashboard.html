@@ -19,7 +19,12 @@
                                 {% for landmark in landmark_point_info %}
                                     <img src="{% static 'qrs/' %}{{landmark.qr_file_name}}" alt="{{ landmark.name }}" style="width:100%" />
                                     <div class="caption">
-                                      <h4><p align="center">{{ landmark.id }}. {{ landmark.name }}</p></h4>
+                                      <h4>
+                                          <p align="center">
+                                              <label>{{ landmark.left }} ← </label>
+                                              {{ landmark.id }}. {{ landmark.name }}
+                                              <label> → {{ landmark.right }}</label></p>
+                                      </h4>
                                     </div>
                                     <hr>
                                 {% endfor %}
