@@ -6,7 +6,7 @@
 - __Backend(Language)__: Django(Python)
 - __Frontend__: HTML, CSS, Bootstrap
 - __Mobile__: iOS [[Link](https://github.com/devming/SubwayiOSApplication)]
-- __Open API__: Seoul OpenAPI
+- __Open API__: Seoul OpenAPI [지하철 최단 경로 API](https://data.seoul.go.kr/dataList/datasetView.do?infId=OA-12762&srvType=A&serviceKind=1&currentPageNo=1)
 - __Server__: AWS ubuntu free tier
 - __Database__: SQLite3
 
