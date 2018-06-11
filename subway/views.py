@@ -3,6 +3,8 @@ import json
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
+
+from subway.shortest_path import get_shortest_path
 from .qrcode_generator import qrcode_generator
 from .forms import LandmarkForm
 from .compose_subway_stations import shortest_path
@@ -61,16 +63,18 @@ def register_landmark(request):
                                                          'down_station': Subway.objects.get(name=admin_info.station.name).down_station})
 
 
-# TODO: 들어온 request인자를 바탕으로
-def return_qr(request, station_admin_id, idx):
+# 앱에서 QR코드를 찍으면 idx까지의 url을 string으로 전달 받고,
+# 뒤에 /{destination역이름}을 붙여서 다시 return_qr로 전송하게 된다.
+def return_qr(request, station_admin_id, idx, destination):
     station = Admins.objects.get(admin_id=station_admin_id).station
     landmark = SubwayLandmarkPoint.objects.get(id=idx, station_name=station.name)
     left = landmark.left
     right = landmark.right
 
-    # TODO: shortest path 에서 다음 역이 left이면 0 right이면 1반환
+    # TODO: shortest path 에서 다음 역이 left이면 1 right이면 2, 잘못된 값이면 0 반환
+    reponse_left_parameter = get_shortest_path(station.name, destination, left, right)
 
-    data = json.dumps({'direction': 0}, ensure_ascii=False)
+    data = json.dumps({'direction': reponse_left_parameter}, ensure_ascii=False)
 
     return JsonResponse(data, safe=False, content_type=u"application/json; charset=utf-8")
 
