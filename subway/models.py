@@ -41,19 +41,16 @@ class Subway(models.Model):
 
 
 class SubwayLandmarkPoint(models.Model):
-    index = models.IntegerField
-    station = models.ForeignKey(Subway, on_delete=models.CASCADE)
+    station = models.ForeignKey(Subway, null=True, on_delete=models.CASCADE)
+    station_name = models.CharField(max_length=20, null=False, default="Station Not Set")
+    name = models.CharField(max_length=50, null=False, default="Landmark Not Set")
     # x = models.IntegerField
     # y = models.IntegerField
     # z = models.IntegerField
-    left = models.CharField(max_length=5, null=False, default="")      # 0 = 하행선 (내선)
-    right = models.CharField(max_length=5, null=False, default="")     # 1 = 상행선 (외선)
-
-    def save_data(self, index, station, left, right):
-        self.index = index
-        self.station = station
-        self.left = left
-        self.right = right
+    left = models.CharField(max_length=20, null=False, default="")      # 하행선 (내선)
+    right = models.CharField(max_length=20, null=False, default="")     # 상행선 (외선)
+    qr_file_name = models.CharField(max_length=50, null=False, default="")
+    url = models.CharField(max_length=100, null=False, default="")
 
 
 # class History(models.Model):
