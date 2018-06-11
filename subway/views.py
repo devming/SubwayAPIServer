@@ -72,9 +72,9 @@ def return_qr(request, station_admin_id, idx, destination):
     right = landmark.right
 
     # TODO: shortest path 에서 다음 역이 left이면 1 right이면 2, 잘못된 값이면 0 반환
-    reponse_left_parameter = get_shortest_path(station.name, destination, left, right)
+    response_left_parameter = get_shortest_path(station.name, destination, left, right)
 
-    data = json.dumps({'direction': reponse_left_parameter}, ensure_ascii=False)
+    data = json.dumps({'stationName': station.name, 'direction': response_left_parameter}, ensure_ascii=False)
 
     return JsonResponse(data, safe=False, content_type=u"application/json; charset=utf-8")
 
