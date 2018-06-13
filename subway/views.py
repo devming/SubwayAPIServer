@@ -91,24 +91,6 @@ def admin_setting(request):
     return render(request, 'subway/admin_setting.html', {'admin': admin_info, 'station_name': name})
 
 
-# def register_landmark_point(request):
-#
-#     name = request.GET['station_name']
-#     direction = request.GET['direction']
-#     print("direction = " + direction)
-#
-#     station = Subway.objects.get(name=name)
-#     # station[0].name
-#     print("### name ###")
-#     print(name)
-#     print("### station ###")
-#     print(station)
-#     SubwayLandmarkPoint().save_data(station, '의왕', '화서')
-#
-#     # landmark = SubwayLandmarkPoint.objects.get(station=station)
-#     return render(request, 'subway/dashboard.html', {})
-
-
 # 한 번만 호출
 def insert_station_datas():
     data = shortest_path()
