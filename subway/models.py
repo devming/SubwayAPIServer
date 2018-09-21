@@ -1,3 +1,4 @@
+# coding: utf-8
 from django.db import models
 from .compose_subway_stations import shortest_path
 
@@ -14,9 +15,10 @@ class Admins(models.Model):
 
 class Subway(models.Model):
     code = models.CharField(max_length=5)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
     line = models.CharField(max_length=20)
     fr_code = models.CharField(max_length=10)
+    eng_name = models.CharField(max_length=50, null=True)
     landmarks = models.ForeignKey('SubwayLandmarkPoint', on_delete=models.CASCADE, null=True)
     up_station = models.CharField(max_length=20, default="", null=True)
     down_station = models.CharField(max_length=20, default="", null=True)
@@ -27,6 +29,7 @@ class Subway(models.Model):
         self.name = station["STATION_NM"]
         self.line = station["LINE_NUM"]
         self.fr_code = station["FR_CODE"]
+        self.eng_name = station["STATION_NM_ENG"]
         if s > 0:
             self.up_station = data[line][s-1]["STATION_NM"]
         if s < len(data[line])-1:

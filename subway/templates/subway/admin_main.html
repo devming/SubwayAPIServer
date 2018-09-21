@@ -28,13 +28,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i> {{ admin.admin_id }} 관리자님 <span class="caret"></span></a>
-                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                        <li><a href="#">My Profile</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+                {% if admin is None %}
+                    <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Login</a></li>
+                {% else %}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i> {{ admin.admin_id }} 관리자님 <span class="caret"></span></a>
+                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                            <li><a href="#">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/logout"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -58,9 +62,47 @@
         </div>
     </div>
 
-     {% block content %}
 
-     {% endblock %}
+    {% if admin is None %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <i class="glyphicon glyphicon-wrench pull-right"></i>
+                    <h4>로그인</h4>
+                </div>
+            </div>
+            <div class="panel-body">
+                <form method="post" action="/login">{% csrf_token %}
+                    <div class="control-group">
+                        <label>관리자 아이디</label>
+                        <div class="controls">
+                            <input type="text" name="admin_id">
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="control-group">
+                        <label>관리자 비밀번호</label>
+                        <div class="controls">
+                            <input type="password" name="admin_pw">
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" name="login_btn" value="로그인">
+                        </div>
+                    </div>
+                    <br/>
+                </form>
+            </div>
+            <!--/panel content-->
+        </div>
+    {% else %}
+        {% block content %}
+
+        {% endblock %}
+    {% endif %}
 
     <!--/panel-->
 </div>
