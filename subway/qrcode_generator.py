@@ -11,6 +11,7 @@ from subway.apikey import base_url
 def qrcode_generator(admin_id, landmark_index):
     url = base_url+"qr/"+admin_id+"/"+landmark_index
     file_full_path_name = "myproject/subway"+STATIC_URL+"qrs/"+admin_id+"_"+landmark_index+".png"
+    # file_full_path_name = "subway" + STATIC_URL + "qrs/" + admin_id + "_" + landmark_index + ".png"
     file_name = admin_id + "_" + landmark_index + ".png"
 
     print("url: " + url)

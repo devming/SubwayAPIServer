@@ -39,7 +39,7 @@ def register_landmark(request):
         return render(request, 'subway/register_page.html')
     # landmark_count = len(list(SubwayLandmarkPoint.objects.filter(station_name=admin_info.station.name)))
     try:
-        landmark_index = str(int(list(SubwayLandmarkPoint.objects.all().values_list('id', flat=True))[-1]) + 1)
+        landmark_index = str(int(len(list(SubwayLandmarkPoint.objects.all()))) + 1)
     except IndexError:
         landmark_index = "0"
 
