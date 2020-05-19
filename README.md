@@ -1,6 +1,6 @@
 # 지하철 역사 내 방위 제시 시스템 연구
 
-## 프로젝트 명: Gaongilro (Ver. Mobile)
+## 프로젝트 명: 가온길로(모바일)
 
 ### 1. 사용 기술
 - __Backend Framework / Language__: Django 2.05 / Python 3.4
